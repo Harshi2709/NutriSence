@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Add background image property */
+    background-image: url('bg.jpg');
+    background-size: cover;
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjusted background color with opacity */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #008000; /* Green color for success */
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #0077cc; /* Blue color for the link */
+}
+
+a:hover {
+    text-decoration: underline;
+}

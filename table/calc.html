@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('https://img.icliniq.com/article/who-nutrient-recommendati-3847.webp') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 80%;
+      margin: 50px auto;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    td[contenteditable="true"] {
+      background-color: #fff; /* Highlight editable cells */
+    }
+
+    .total-row {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Nutrient Intake Tracker</h1>
+    
+    <table border="1" id="nutrientTable">
+      <tr>
+        <th></th>
+        <th>Protein</th>
+        <th>Fat</th>
+        <th>Carbohydrates</th>
+        <th>Vitamins</th>
+        <th>Minerals</th>
+      </tr>
+      <tr>
+        <td contenteditable="false">Monday</td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Protein"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Fat"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Carbohydrates"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Vitamins"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Minerals"></td>
+      </tr>
+      <tr>
+        <td contenteditable="false">Tuesday</td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Protein"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Fat"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Carbohydrates"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Vitamins"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Minerals"></td>
+      </tr>
+      <tr>
+        <td contenteditable="false">Wednesday</td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Protein"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Fat"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Carbohydrates"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Vitamins"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Minerals"></td>
+      </tr>
+      <tr>
+        <td contenteditable="false">Thursday</td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Protein"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Fat"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Carbohydrates"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Vitamins"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Minerals"></td>
+      </tr>
+      <tr>
+        <td contenteditable="false">Friday</td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Protein"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Fat"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Carbohydrates"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Vitamins"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Minerals"></td>
+      </tr>
+      <tr>
+        <td contenteditable="false">saturday</td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Protein"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Fat"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Carbohydrates"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Vitamins"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Minerals"></td>
+      </tr>
+      <tr>
+        <td contenteditable="false">sunday</td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Protein"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Fat"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Carbohydrates"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Vitamins"></td>
+        <td contenteditable="true" data-day="Monday" data-nutrient="Minerals"></td>
+      </tr>
+      <!-- Repeat the above structure for other days of the week -->
+      <!-- ... -->
+      <tr class="total-row">
+        <td>Total</td>
+        <td id="totalProtein"></td>
+        <td id="totalFat"></td>
+        <td id="totalCarbohydrates"></td>
+        <td id="totalVitamins"></td>
+        <td id="totalMinerals"></td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    document.addEventListener('input', function(event) {
+      const target = event.target;
+      if (target.isContentEditable) {
+        const day = target.getAttribute('data-day');
+        const nutrient = target.getAttribute('data-nutrient');
+        const value = parseFloat(target.innerText) || 0;
+        // Here you can store the value in your preferred way (e.g., in localStorage, a database, etc.)
+        console.log(`User input for ${day}'s ${nutrient}: ${value}`);
+        updateTotalRow();
+      }
+    });
+
+    function updateTotalRow() {
+      const nutrientTable = document.getElementById('nutrientTable');
+      const totalRow = nutrientTable.getElementsByClassName('total-row')[0];
+      const totalCells = totalRow.getElementsByTagName('td');
+      
+      // Initialize totals
+      let totalProtein = 0, totalFat = 0, totalCarbohydrates = 0, totalVitamins = 0, totalMinerals = 0;
+
+      // Loop through rows (skipping the header and total row)
+      for (let i = 1; i < nutrientTable.rows.length - 1; i++) {
+        const row = nutrientTable.rows[i];
+
+        // Loop through cells
+        for (let j = 1; j < row.cells.length; j++) {
+          const cellValue = parseFloat(row.cells[j].innerText) || 0;
+
+          // Update totals
+          switch (j) {
+            case 1:
+              totalProtein += cellValue;
+              break;
+            case 2:
+              totalFat += cellValue;
+              break;
+            case 3:
+              totalCarbohydrates += cellValue;
+              break;
+            case 4:
+              totalVitamins += cellValue;
+              break;
+            case 5:
+              totalMinerals += cellValue;
+              break;
+          }
+        }
+      }
+
+      // Update total row
+      totalCells[1].innerText = totalProtein.toFixed(2);
+      totalCells[2].innerText = totalFat.toFixed(2);
+      totalCells[3].innerText = totalCarbohydrates.toFixed(2);
+      totalCells[4].innerText = totalVitamins.toFixed(2);
+      totalCells[5].innerText = totalMinerals.toFixed(2);
+    }
+  </script>
+
+</body>
+</html>
